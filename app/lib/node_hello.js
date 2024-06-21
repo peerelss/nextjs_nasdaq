@@ -1,15 +1,5 @@
 import fs from "fs";
 import Papa from "papaparse";
-import { calculateAverages } from "./tools";
-import moment from "moment";
-function parseDate(dateString) {
-  const date = new Date(dateString);
-  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
-    2,
-    "0"
-  )}`;
-}
-
 export async function csv2json() {
   const csvFile = fs.readFileSync("nasdaq.csv", "utf8");
   const parsedData = Papa.parse(csvFile, {
@@ -39,10 +29,7 @@ export async function csv2json() {
       average: sum / count,
     };
   });
-  const monthLen = monthlyAverages.length;
-  const resultMonth = [];
-  resultMonth.push({});
-  for (let i = 0; i < monthLen; i++) {}
-  console.log(monthlyAverages.length);
+
   return monthlyAverages;
 }
+csv2json();
